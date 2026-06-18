@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Node
+node_modules/
+
+# IDE
+.vscode/
+.idea/
+
+# Claude Code session data
+.claude/
+
+# Temp/generated
+Rapor/slide_images/
+Rapor/*.docx
+Rapor/Proje_Sunumu.pdf
+Rapor/Proje_Sunumu_slides.pdf
+Rapor/chart_images/
+Rapor/*.js
+Rapor/*.py
+
+# Source code of examined project (copyright)
+theExaminedProject/src/
+theExaminedProject/images/
+theExaminedProject/features.json
+
+# Other
+ücretliVersion/
+generate_card.py
+build_metadata.py
+run_experiment.py
+build_tables.py
+build_excel.py
+build_pdf.py
+*.xlsx
+*.log
+CLAUDE.md

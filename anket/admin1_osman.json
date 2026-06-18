@@ -1,0 +1,42 @@
+{
+  "agent_id": "admin1",
+  "prompt_file": null,
+  "evaluator": {
+    "name": "Osman",
+    "role": "Yüksek Lisans",
+    "company": ""
+  },
+  "timestamp": "2026-06-08T13:40:33.533Z",
+  "scores": {
+    "UI": 6,
+    "UX": 6,
+    "Visual Design": 6,
+    "Responsive Design": 7,
+    "Accessibility": 7,
+    "Typography": 8,
+    "Animation": 5,
+    "Theming": 6,
+    "Code Quality": 9,
+    "Performance": 4,
+    "Data Structures": 7,
+    "Component Architecture": 9,
+    "State Management": 9,
+    "Security": 6,
+    "Error Handling": 7,
+    "Reusability": 9,
+    "Functionality": 8,
+    "Form Validation": 8,
+    "Navigation": 9,
+    "Consistency": 7,
+    "Loading States": 7,
+    "Empty States": 6,
+    "Domain Knowledge": 6,
+    "Completeness": 98,
+    "Innovation": 8,
+    "Maintainability": 7,
+    "Testing": 7,
+    "Documentation": 8,
+    "API Integration": 7,
+    "Scalability": 9
+  }
+}

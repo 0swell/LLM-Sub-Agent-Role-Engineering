@@ -1,0 +1,194 @@
+============================================================
+AGENT KATEGORILERI (100 Agent Dagilim Plani)
+============================================================
+
+============================================================
+GRUP A: Sirket + Departman (25 agent) — id: 1-25
+Top market cap yazilim sirketleri, 5+ yil deneyim, min 3/sirket
+company=1, department=1, company_tier=3, seniority=3-4
+============================================================
+
+--- Microsoft (3) ---
+A01. Microsoft — Software Engineering Dept — Senior Frontend Developer (7 yil)
+A02. Microsoft — Design Dept — UX Lead (8 yil)
+A03. Microsoft — Engineering Dept — Engineering Manager (10 yil)
+
+--- Google (3) ---
+A04. Google — Frontend Engineering Dept — Staff UX Engineer (9 yil)
+A05. Google — Platform Dept — Senior SRE (6 yil)
+A06. Google — Design Dept — Design Lead (8 yil)
+
+--- Apple (3) ---
+A07. Apple — Software Engineering Dept — Senior UI Engineer (7 yil)
+A08. Apple — Human Interface Dept — HIG Design Lead (10 yil)
+A09. Apple — Web Technologies Dept — Frontend Architect (12 yil)
+
+--- Meta (3) ---
+A10. Meta — Product Design Dept — Senior Product Designer (6 yil)
+A11. Meta — Frontend Engineering Dept — Staff Frontend Engineer (8 yil)
+A12. Meta — Design Systems Dept — Design Systems Lead (7 yil)
+
+--- Amazon (3) ---
+A13. Amazon — UX Design Dept — Senior UX Designer (6 yil)
+A14. Amazon — Web Development Dept — Frontend Tech Lead (9 yil)
+A15. Amazon — Accessibility Dept — Accessibility Engineer (5 yil)
+
+--- Salesforce (3) ---
+A16. Salesforce — Lightning Platform Dept — Senior Lightning Developer (6 yil)
+A17. Salesforce — UX Research Dept — UX Researcher (5 yil)
+A18. Salesforce — Platform Engineering Dept — Platform Engineer (7 yil)
+
+--- Adobe (3) ---
+A19. Adobe — Creative Cloud Dept — Senior Creative Developer (8 yil)
+A20. Adobe — Design Technology Dept — Design Technologist (6 yil)
+A21. Adobe — Web Platform Dept — Frontend Architect (10 yil)
+
+--- Oracle (4) ---
+A22. Oracle — Cloud UI Dept — Senior UI Developer (7 yil)
+A23. Oracle — UX Design Dept — UX Lead (8 yil)
+A24. Oracle — Cloud Engineering Dept — Cloud Frontend Engineer (6 yil)
+A25. Oracle — Accessibility Dept — Accessibility Specialist (5 yil)
+
+
+============================================================
+GRUP B: Sirket VAR, Departman YOK (25 agent) — id: 26-50
+Startup, orta olcekli, ajans, Turk sirketleri
+company=1, department=0, company_tier=1-2, seniority=1-3
+============================================================
+
+--- Startup / Erken Asama (8) ---
+B01. Vercel — Full-Stack Developer (2 yil)
+B02. Linear — Frontend Developer (3 yil)
+B03. Supabase — UI Engineer (2 yil)
+B04. Retool — Frontend Developer (1 yil)
+B05. Railway — Full-Stack Developer (2 yil)
+B06. Resend — Creative Developer (1 yil)
+B07. Liveblocks — Frontend Engineer (3 yil)
+B08. Cal.com — CTO (4 yil)
+
+--- Orta Olcekli Sirket (8) ---
+B09. Stripe — Mid-Level Frontend Developer (3 yil)
+B10. Figma — Product Designer (4 yil)
+B11. Notion — Frontend Engineer (3 yil)
+B12. Vercel — QA Engineer (2 yil)
+B13. Twilio — Product Owner (4 yil)
+B14. Datadog — UI Developer (3 yil)
+B15. Atlassian — Frontend Developer (4 yil)
+B16. Shopify — Web Developer (3 yil)
+
+--- Ajans / Freelance Firma (5) ---
+B17. ustwo (Agency) — Web Designer (3 yil)
+B18. Huge (Agency) — Creative Developer (4 yil)
+B19. Fantasy (Agency) — UX Designer (5 yil)
+B20. Instrument (Agency) — Frontend Developer (3 yil)
+B21. Ramotion (Agency) — Project Manager (4 yil)
+
+--- Turk Yazilim Sirketi (4) ---
+B22. Trendyol — Frontend Developer (3 yil)
+B23. Getir — Frontend Developer (2 yil)
+B24. Insider — UX Designer (3 yil)
+B25. Peak Games — Game UI Developer (4 yil)
+
+
+============================================================
+GRUP C: Sirket YOK, Teknik Bilgili (30 agent) — id: 51-80
+Bagimsiz profesyoneller, ogrenciler, akademisyenler
+company=0, department=0, company_tier=0, seniority=0-3
+============================================================
+
+--- Freelance Uzman (8) ---
+C01. Freelance Web Designer (10 yil)
+C02. Freelance Full-Stack Developer (8 yil)
+C03. Freelance UX Consultant (12 yil)
+C04. Freelance Mobile Developer (6 yil)
+C05. Freelance Frontend Developer (5 yil)
+C06. Freelance UI/UX Designer (7 yil)
+C07. Freelance DevOps Engineer (9 yil)
+C08. Freelance Performance Consultant (6 yil)
+
+--- Universite Ogrencisi 3-4. Sinif (8) ---
+C09. MAKU Bilgisayar Muh. 4. sinif
+C10. ITU Bilgisayar Muh. 3. sinif
+C11. ODTU Bilgisayar Muh. 4. sinif
+C12. Bogazici CMPE 4. sinif
+C13. Hacettepe Bilgisayar Muh. 3. sinif
+C14. Ege Yazilim Muh. 4. sinif
+C15. Yildiz Teknik Bilgisayar Muh. 3. sinif
+C16. Ankara Uni. Bilgisayar Muh. 4. sinif
+
+--- Bootcamp / Self-Taught (6) ---
+C17. 6 aylik Frontend Bootcamp mezunu
+C18. 1 yillik self-taught developer
+C19. Career changer (ogretmenden developer'a)
+C20. Online kurs ile ogrenen (Udemy/Coursera)
+C21. 3 aylik intensive coding bootcamp mezunu
+C22. Hobi olarak kod yazan muhendis (makine muh.)
+
+--- Akademisyen / Arastirmaci (4) ---
+C23. HCI (Human-Computer Interaction) Profesoru
+C24. Bilgisayar Muh. Arastirma Gorevlisi
+C25. UX Arastirmacisi (PhD)
+C26. Yazilim Muhendisligi Docenti
+
+--- Farkli Disiplin ama Teknik (4) ---
+C27. Backend-only Developer (frontend bilmez)
+C28. Data Scientist (ML/AI odakli)
+C29. Mobile Developer (iOS/Android, web bilmez)
+C30. Embedded Systems Engineer (web bilmez)
+
+--- Ek Profiller (10) ---
+C31. Technical Writer (dokumantasyon uzmani, 4 yil)
+C32. QA / Test Engineer (freelance, 5 yil)
+C33. Scrum Master (agile deneyimli, 6 yil)
+C34. Indie Product Manager (kendi urununu yapan)
+C35. Open Source Contributor (aktif GitHub, 3 yil)
+C36. Lise Bilisim Ogretmeni (web dersi veriyor)
+C37. Junior Frontend Developer (6 ay deneyim)
+C38. Yazilim Stajyeri (ilk staj)
+C39. Tech Blogger / YouTuber (icerik uretici)
+C40. Siber Guvenlik Arastirmacisi (web security)
+
+
+============================================================
+GRUP D: Kod Bilgisi Yok / Cok Az (10 agent) — id: 81-90
+Kontrol grubu — "bilmeyen kisi ne puan verir?"
+company=0, department=0, company_tier=0, seniority=0, experience=0
+============================================================
+
+--- 1. Sinif Ogrencisi (3) ---
+D01. MAKU Bilgisayar Muh. 1. sinif
+D02. Liseden yeni mezun (henuz universite baslamadi)
+D03. Ilk donem programlama ogrencisi (sadece Python giris)
+
+--- Teknik Olmayan Meslek (4) ---
+D04. Muhasebeci (25 yil deneyim, kod bilmez)
+D05. Avukat (hukuk, teknoloji ilgisi yok)
+D06. Biyolog (laboratuvar, web bilmez)
+D07. Grafik Tasarimci (print, web tasarim bilmez)
+
+--- Siradan Kullanici (3) ---
+D08. Siradan internet kullanicisi (45 yas)
+D09. Emekli ogretmen (60 yas)
+D10. Lise ogrencisi (16 yas, sosyal medya kullanicisi)
+
+
+============================================================
+DENEME + ADMIN (ilk 3 satir, id: 0-1)
+============================================================
+admin   — Ground Truth: Real expert human evaluator (Senior Software Engineer 10+ yil)
+admin1  — Ground Truth: Real expert human evaluator (UI/UX Lead Designer 8+ yil)
+Deneme  — Basic SubAgent (test amacli, id:1)
+
+
+============================================================
+OZET
+============================================================
+Grup A (Sirket+Dept):   25 agent  [id 1-25]
+Grup B (Sirket only):   25 agent  [id 26-50]
+Grup C (Bagimsiz):      40 agent  [id 51-90]
+Grup D (Kontrol):       10 agent  [id 91-100]
+Admin:                   2 satir  [id 0]
+Deneme:                  1 agent  [id 1 — Grup A'nin ilk satiri olarak kalabilir]
+--------------------------------------------
+TOPLAM:                100 agent + 2 admin
+============================================================

@@ -1,0 +1,102 @@
+﻿agent_id,agent_name,role_title,company,department,has_company,has_department,is_frontend_expert,is_design_expert,is_backend_only,is_non_technical,is_student,is_academic,company_tier,seniority_level,experience_years,prompt_length,prompt_word_count,role_count,context_count,capabilities_count,task_approach_count,rules_count,constraints_count,output_format_count
+1,001_deneme_basic,Frontend Developer,,,False,False,True,True,False,False,True,False,0,0,0,1717,272,2,3,5,5,4,4,1
+1,001_ms_senior_frontend_dev,Senior Frontend Developer,Microsoft,Software Engineering Department,True,True,True,True,False,False,False,False,3,4,7,3246,488,4,5,7,7,5,5,3
+2,002_ms_ux_lead,UX Lead,Microsoft,Design Department,True,True,True,True,False,False,True,False,3,4,8,3203,488,4,5,7,7,5,4,3
+3,003_ms_engineering_manager,Engineering Manager,Microsoft,Engineering Department,True,True,True,True,False,True,False,True,3,4,10,3272,505,4,5,7,7,5,5,3
+4,004_google_staff_ux_eng,Staff UX Engineer,Google,Frontend Engineering Department,True,True,True,True,False,False,False,False,3,4,9,3340,500,5,5,7,7,5,5,3
+5,005_google_senior_sre,Senior SRE,Google,Platform Department,True,True,True,True,False,False,False,False,3,3,6,3542,536,5,5,7,7,5,4,4
+6,006_google_design_lead,Design Lead,Google,Design Department,True,True,True,True,False,False,True,False,3,4,8,2462,380,4,5,6,6,4,4,3
+7,007_apple_senior_ui_eng,Senior UI Engineer,Apple,Software Engineering Department,True,True,True,True,False,False,False,False,3,4,7,2404,363,4,5,6,6,4,4,3
+8,008_apple_hig_design_lead,HIG Design Lead,Apple,Human Interface Department,True,True,True,True,False,False,False,False,3,4,10,2443,373,5,5,6,6,4,4,3
+9,009_apple_frontend_architect,Frontend Architect,Apple,Web Technologies Department,True,True,True,True,False,False,False,False,3,4,12,2469,364,4,5,6,6,4,4,3
+10,010_meta_senior_product_designer,Senior Product Designer,Meta,Product Design Department,True,True,True,True,False,False,False,False,3,3,6,2176,335,4,5,6,6,4,4,3
+11,011_meta_staff_frontend_eng,Staff Frontend Engineer,Meta,Frontend Engineering Department,True,True,True,True,False,False,False,False,3,4,8,2279,338,4,5,6,6,4,4,3
+12,012_meta_design_systems_lead,Design Systems Lead,Meta,Design Systems Department,True,True,True,True,False,False,False,True,3,4,7,2246,334,4,5,6,6,4,4,3
+13,013_amazon_senior_ux_designer,Senior UX Designer,Amazon,UX Design Department,True,True,True,True,False,False,False,False,3,3,6,2101,329,4,5,6,6,4,4,3
+14,014_amazon_frontend_tech_lead,Frontend Tech Lead,Amazon,Web Development Department,True,True,True,True,False,False,False,False,3,4,9,2072,312,4,5,6,5,4,4,3
+15,015_amazon_accessibility_eng,Accessibility Engineer,Amazon,Accessibility Department,True,True,True,True,False,False,False,False,3,4,5,2453,356,3,5,6,6,4,4,3
+16,016_salesforce_senior_lightning_dev,Senior Lightning Developer,Salesforce,Lightning Platform Department,True,True,True,True,False,False,False,False,3,4,6,2058,303,4,5,6,5,3,4,3
+17,017_salesforce_ux_researcher,UX Researcher,Salesforce,UX Research Department,True,True,True,True,False,False,False,True,3,4,5,1994,302,4,5,5,5,4,4,3
+18,018_salesforce_platform_eng,Platform Engineer,Salesforce,Platform Engineering Department,True,True,True,True,False,False,False,False,3,4,7,1909,287,5,5,6,5,3,4,3
+19,019_adobe_senior_creative_dev,Senior Creative Developer,Adobe,Creative Cloud Department,True,True,True,True,False,False,False,False,3,4,8,1934,295,3,5,6,5,3,4,3
+20,020_adobe_design_technologist,Design Technologist,Adobe,Design Technology Department,True,True,True,True,False,False,False,False,3,4,6,1883,296,4,4,6,4,3,4,3
+21,021_adobe_frontend_architect,Frontend Architect,Adobe,Web Platform Department,True,True,True,True,False,False,False,True,3,4,10,2016,303,4,5,6,5,3,4,3
+22,022_oracle_senior_ui_dev,Senior UI Developer,Oracle,Cloud UI Department,True,True,True,True,False,False,False,False,3,4,7,1921,296,4,5,6,5,3,4,3
+23,023_oracle_ux_lead,UX Lead,Oracle,UX Design Department,True,True,True,True,False,False,False,True,3,4,8,1902,291,4,5,6,5,3,4,3
+24,024_oracle_cloud_frontend_eng,Cloud Frontend Engineer,Oracle,Cloud Engineering Department,True,True,True,True,False,False,False,False,3,0,6,1986,298,4,5,6,5,3,4,3
+25,025_oracle_accessibility_specialist,Accessibility Specialist,Oracle,Accessibility Department,True,True,True,True,False,False,False,False,3,4,5,2059,309,3,5,6,6,3,4,3
+26,026_vercel_fullstack_dev,,,,False,False,True,True,False,False,False,False,2,4,2,2647,415,5,5,6,6,5,4,3
+27,027_linear_frontend_dev,,,,False,False,True,True,False,False,False,False,1,4,3,2819,440,5,5,6,6,5,4,3
+28,028_supabase_ui_eng,,,,False,False,True,True,False,False,False,False,1,4,2,2671,417,6,5,6,6,4,3,3
+29,029_retool_frontend_dev,,,,False,False,True,True,False,False,True,False,1,4,1,2682,427,5,5,6,6,4,3,4
+30,030_railway_fullstack_dev,,,,False,False,True,True,False,False,False,False,1,0,2,2613,400,5,5,6,6,4,4,3
+31,031_resend_creative_dev,,,,False,False,True,True,False,False,False,False,1,4,1,1892,283,4,5,6,5,3,3,3
+32,032_liveblocks_frontend_eng,,,,False,False,True,True,False,False,False,False,1,4,3,1776,271,4,5,6,4,3,4,3
+33,033_calcom_cto,,,,False,False,True,True,False,False,False,False,1,4,4,1801,283,4,5,6,4,3,4,3
+34,034_stripe_mid_frontend_dev,,,,False,False,True,True,False,False,False,False,2,2,3,1889,291,4,5,6,4,3,4,3
+35,035_figma_product_designer,,,,False,False,True,True,False,False,False,False,2,4,4,1802,279,4,5,6,5,3,4,3
+36,036_notion_frontend_eng,,,,False,False,True,True,False,False,False,False,2,4,3,1718,264,4,4,6,4,3,3,3
+37,037_vercel_qa_eng,,,,False,False,True,True,False,False,False,False,2,4,2,1821,293,4,5,6,5,3,4,3
+38,038_twilio_product_owner,,,,False,False,True,True,False,False,False,False,2,0,4,1867,284,4,5,5,5,3,3,3
+39,039_datadog_ui_dev,,,,False,False,True,True,False,False,False,False,2,0,3,1729,266,4,5,5,4,3,3,3
+40,040_atlassian_frontend_dev,,,,False,False,True,True,False,False,False,False,2,4,4,1775,265,4,5,6,4,3,3,3
+41,041_shopify_web_dev,,,,False,False,True,True,False,False,False,False,2,0,3,1563,244,3,5,6,4,3,3,3
+42,042_ustwo_web_designer,,,,False,False,True,True,False,False,False,False,1,4,3,1649,255,4,5,5,4,3,3,3
+43,043_huge_creative_dev,,,,False,False,True,True,False,False,False,False,1,4,4,1817,280,4,5,6,4,3,4,3
+44,044_fantasy_ux_designer,,,,False,False,True,True,False,False,False,False,1,4,5,1709,269,4,5,5,4,3,4,3
+45,045_instrument_frontend_dev,,,,False,False,True,True,False,False,False,False,1,2,3,1677,264,4,4,6,4,3,3,3
+46,046_ramotion_project_manager,,,,False,False,True,True,False,False,False,False,1,0,4,1814,279,5,5,5,4,3,4,3
+47,047_trendyol_frontend_dev,,,,False,False,True,True,False,False,False,False,2,0,3,1728,259,4,5,6,4,3,3,3
+48,048_getir_frontend_dev,,,,False,False,True,True,False,False,False,False,2,4,2,1718,260,4,5,6,4,3,3,3
+49,049_insider_ux_designer,,,,False,False,True,True,False,False,False,False,2,4,3,1733,271,4,5,6,4,3,3,3
+50,050_peakgames_game_ui_dev,,,,False,False,True,True,False,False,False,False,3,4,4,1969,301,5,5,6,5,3,4,3
+51,051_freelance_web_designer,Freelance Web Designer,,,False,False,True,True,False,False,False,False,2,0,10,2917,454,5,5,6,6,5,4,3
+52,052_freelance_fullstack_dev,Freelance Full-Stack Developer,,,False,False,True,True,False,False,False,False,2,4,8,2734,426,4,5,6,6,5,4,3
+53,053_freelance_ux_consultant,Freelance UX Consultant,,,False,False,True,True,False,False,False,False,0,4,12,2036,305,4,5,6,6,4,4,3
+54,054_freelance_mobile_dev,Freelance Mobile Developer,,,False,False,True,True,False,False,False,False,0,4,6,1863,289,4,5,6,5,3,4,3
+55,055_freelance_frontend_dev,Freelance Frontend Developer,,,False,False,True,True,False,False,False,False,0,4,5,1691,259,4,4,6,4,3,3,3
+56,056_freelance_ui_ux_designer,Freelance UI/UX Designer,,,False,False,True,True,False,False,False,False,2,4,7,1866,291,4,5,6,4,3,4,3
+57,057_freelance_devops_eng,Freelance DevOps Engineer,,,False,False,True,True,False,False,False,False,0,4,9,1913,293,3,5,6,3,3,4,3
+58,058_freelance_perf_consultant,Freelance Performance Consultant,,,False,False,True,True,False,False,False,False,0,4,6,1934,297,4,5,6,4,3,4,3
+59,059_maku_cs_4,Student,,,False,False,True,True,False,False,True,False,0,4,0,2926,470,5,5,6,6,5,4,3
+60,060_itu_cs_3,Student,,,False,False,True,True,False,False,True,False,0,4,0,2844,434,5,5,6,6,5,3,3
+61,061_odtu_cs_4,Student,,,False,False,True,True,False,False,True,False,0,1,0,1926,291,4,4,6,5,3,4,3
+62,062_bogazici_cmpe_4,Student,,,False,False,True,True,False,False,True,False,0,4,0,1788,267,5,4,6,5,3,3,3
+63,063_hacettepe_cs_3,Student,,,False,False,True,True,False,False,True,False,0,4,0,1716,268,4,4,6,4,3,4,3
+64,064_ege_se_4,Student,,,False,False,True,True,False,False,True,False,0,4,0,1712,257,4,5,5,5,3,3,3
+65,065_ytu_cs_3,Student,,,False,False,True,True,False,False,True,False,0,2,0,1406,226,4,4,5,4,2,3,3
+66,066_ankara_cs_4,Student,,,False,False,True,True,False,False,True,False,0,4,0,1491,232,4,3,5,4,2,4,3
+67,067_bootcamp_6month,Bootcamp Graduate,,,False,False,True,True,False,False,True,False,0,4,0,2663,432,6,5,6,6,4,3,3
+68,068_selftaught_1year,Self-Taught Developer,,,False,False,True,True,False,False,True,False,0,4,1,1717,282,4,4,5,4,2,4,3
+69,069_careerchanger_teacher,Career Changer,,,False,False,True,True,False,False,True,False,0,0,0,1688,268,5,5,4,4,2,3,3
+70,070_onlinecourse_learner,Online Course Learner,,,False,False,True,True,False,False,False,False,0,4,0,1619,258,4,4,5,4,2,3,3
+71,071_bootcamp_3month_intensive,Bootcamp Graduate,,,False,False,True,True,False,False,True,False,0,4,0,1613,245,5,4,5,4,2,3,3
+72,072_hobby_coder_mecheng,Hobby Coder,,,False,False,True,True,False,False,True,False,0,0,0,1532,238,4,4,5,4,2,3,3
+73,073_hci_professor,HCI Professor,,,False,False,True,True,False,False,True,True,0,4,20,4238,605,6,6,9,8,7,5,3
+74,074_cs_research_assistant,Research Assistant,,,False,False,True,True,False,False,False,True,0,3,2,1691,265,3,4,5,4,2,4,3
+75,075_ux_researcher_phd,UX Researcher,,,False,False,True,True,False,False,False,True,0,4,5,1778,271,4,5,6,5,3,3,3
+76,076_software_eng_docent,Associate Professor,,,False,False,True,True,False,False,False,True,0,4,15,1865,280,4,5,6,5,3,3,3
+77,077_backend_only_dev,Backend Developer,,,False,False,True,True,False,False,False,False,0,4,6,3026,473,6,5,6,6,4,4,3
+78,078_data_scientist,Data Scientist,,,False,False,True,True,False,False,False,False,0,4,4,1664,260,4,5,5,4,2,4,3
+79,079_mobile_dev_noweb,Mobile Developer,,,False,False,True,True,False,False,False,False,0,4,5,1586,257,4,5,5,4,2,3,3
+80,080_embedded_systems_eng,Embedded Engineer,,,False,False,True,True,False,False,False,False,0,0,8,1579,247,4,4,5,4,2,3,3
+81,081_technical_writer,Technical Writer,,,False,False,True,True,False,False,True,False,0,4,4,3042,463,5,5,6,6,5,3,3
+82,082_qa_test_engineer,QA Engineer,,,False,False,True,True,False,False,False,False,0,0,5,1687,268,3,5,6,4,3,3,3
+83,083_scrum_master,Scrum Master,,,False,False,True,True,False,True,False,False,0,0,6,1569,241,4,5,4,4,2,3,3
+84,084_indie_product_manager,Product Manager,,,False,False,True,True,False,False,False,False,0,0,3,1545,246,4,5,5,4,2,3,3
+85,085_opensource_contributor,Open Source Contributor,,,False,False,True,True,False,False,False,False,0,4,3,1711,259,4,5,5,4,3,3,3
+86,086_highschool_it_teacher,IT Teacher,,,False,False,True,True,False,False,False,False,0,4,8,1603,251,4,5,5,4,2,3,3
+87,087_junior_frontend_6month,Junior Frontend Developer,,,False,False,True,True,False,False,False,False,0,4,0,1554,252,4,4,5,4,2,4,3
+88,088_software_intern,Software Intern,,,False,False,True,True,False,False,False,False,0,4,0,1384,226,4,4,5,3,2,3,3
+89,089_tech_blogger,Tech Blogger,,,False,False,True,True,False,False,False,True,0,4,3,1605,255,4,4,5,4,2,3,3
+90,090_cybersecurity_researcher,Security Researcher,,,False,False,True,True,False,False,False,True,0,0,5,1714,266,3,5,6,4,3,3,3
+91,091_maku_cs_1,Student,,,False,False,True,True,False,False,True,False,0,4,0,2904,491,6,5,5,6,4,3,4
+92,092_fresh_highschool_grad,High School Graduate,,,False,False,True,True,False,False,False,False,0,0,0,1487,250,4,4,4,3,1,3,3
+93,093_firstsemester_pythononly,Student,,,False,False,True,True,False,False,True,False,0,4,0,1359,223,4,4,4,3,1,3,3
+94,094_accountant_nocoding,Accountant,,,False,False,True,True,False,True,False,False,1,4,25,2962,494,5,5,6,6,4,3,4
+95,095_lawyer_notech,Lawyer,,,False,False,True,True,False,True,False,False,1,0,15,1483,244,4,4,3,4,1,3,3
+96,096_biologist_noweb,Biologist,,,False,False,True,True,False,True,False,True,0,0,10,1357,223,4,4,3,3,1,3,3
+97,097_graphicdesigner_printonly,Graphic Designer,,,False,False,True,True,False,True,False,False,0,0,8,1769,278,4,5,5,4,2,3,3
+98,098_casual_internet_user,Internet User,,,False,False,True,True,False,True,False,False,0,1,0,1367,231,6,4,3,3,1,3,3
+99,099_retired_teacher,Retired Teacher,,,False,False,True,True,False,True,False,False,0,1,30,1486,247,5,4,4,4,1,3,3
+100,100_highschool_student,High School Student,,,False,False,True,True,False,False,True,True,0,1,0,1527,253,5,4,4,4,1,3,3
