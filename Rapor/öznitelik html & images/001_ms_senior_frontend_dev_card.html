@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Attribute Dashboard — Grup Bazlı En Başarılı Agentler</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f0f2f5;
+    color: #1a202c;
+    min-height: 100vh;
+  }
+
+  /* ── Navbar ── */
+  .navbar {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+  .nav-brand {
+    color: #fbbf24;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    margin-right: 32px;
+    padding: 16px 0;
+    white-space: nowrap;
+  }
+  .nav-tabs {
+    display: flex;
+    gap: 0;
+    height: 100%;
+  }
+  .nav-tab {
+    padding: 16px 24px;
+    color: #94a3b8;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.25s;
+    white-space: nowrap;
+    user-select: none;
+    position: relative;
+  }
+  .nav-tab:hover {
+    color: #e2e8f0;
+    background: rgba(255,255,255,0.04);
+  }
+  .nav-tab.active {
+    color: #fbbf24;
+    border-bottom-color: #fbbf24;
+    background: rgba(251,191,36,0.06);
+  }
+  .nav-tab .tab-score {
+    display: inline-block;
+    background: rgba(255,255,255,0.1);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-left: 8px;
+  }
+  .nav-tab.active .tab-score {
+    background: rgba(251,191,36,0.2);
+    color: #fbbf24;
+  }
+
+  /* ── Dashboard Content ── */
+  .dashboard-wrapper {
+    padding: 24px 30px 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  .dashboard {
+    display: grid;
+    grid-template-columns: 280px 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 20px;
+  }
+
+  .card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 6px 16px rgba(0,0,0,0.04);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08), 0 12px 28px rgba(0,0,0,0.06);
+  }
+
+  .card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+
+  /* ── Top Row ── */
+  .top-row {
+    grid-column: 1 / 4;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 20px;
+    align-items: stretch;
+  }
+
+  /* ── Profile Card ── */
+  .profile-card {
+    text-align: center;
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .profile-card::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 180px; height: 180px;
+    background: radial-gradient(circle, rgba(251,191,36,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .profile-card::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 140px; height: 140px;
+    background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .profile-card .card-title { color: #64748b; }
+
+  .company-badge {
+    display: inline-block;
+    background: rgba(99,102,241,0.2);
+    color: #a5b4fc;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+  }
+
+  .group-badge {
+    display: inline-block;
+    background: rgba(251,191,36,0.2);
+    color: #fbbf24;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .overall-circle {
+    width: 130px; height: 130px;
+    border-radius: 50%;
+    margin: 0 auto 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+  }
+  .overall-circle svg { position: absolute; top: 0; left: 0; }
+  .overall-number {
+    font-size: 44px; font-weight: 900;
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    line-height: 1;
+    position: relative; z-index: 2;
+  }
+  .overall-label {
+    font-size: 10px; font-weight: 600; color: #94a3b8;
+    text-transform: uppercase; letter-spacing: 2px;
+    position: relative; z-index: 2;
+    margin-top: 2px;
+  }
+
+  .agent-name {
+    font-size: 16px; font-weight: 700; margin: 10px 0 4px;
+    position: relative; z-index: 1;
+  }
+  .agent-role {
+    font-size: 11px; color: #94a3b8; margin-bottom: 16px;
+    position: relative; z-index: 1;
+  }
+
+  .mini-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    position: relative; z-index: 1;
+  }
+  .mini-stat {
+    background: rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: 10px 8px;
+    text-align: center;
+  }
+  .mini-stat-val { font-size: 18px; font-weight: 800; color: #fbbf24; }
+  .mini-stat-label { font-size: 9px; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+
+  /* ── Radar Chart ── */
+  .radar-card {
+    min-height: 320px;
+    position: relative;
+    display: flex; flex-direction: column;
+  }
+  .radar-canvas { width: 100%; flex: 1; min-height: 280px; }
+
+  /* ── Prompt Card ── */
+  .prompt-card {
+    grid-column: 1 / 2;
+    max-height: 520px;
+    overflow-y: auto;
+  }
+  .prompt-card::-webkit-scrollbar { width: 4px; }
+  .prompt-card::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 2px; }
+
+  .prompt-section {
+    margin-bottom: 12px;
+    border-radius: 10px;
+    padding: 10px 12px;
+    border-left: 4px solid;
+  }
+  .prompt-section:last-child { margin-bottom: 0; }
+  .prompt-section-title {
+    font-size: 10px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 1.5px; margin-bottom: 4px;
+  }
+  .prompt-section-body {
+    font-size: 10.5px; line-height: 1.55; color: #475569;
+  }
+  .prompt-section-body li { margin-bottom: 2px; margin-left: 8px; }
+
+  .ps-role { background: rgba(99,102,241,0.06); border-color: #6366f1; }
+  .ps-role .prompt-section-title { color: #6366f1; }
+  .ps-context { background: rgba(16,185,129,0.06); border-color: #10b981; }
+  .ps-context .prompt-section-title { color: #10b981; }
+  .ps-capabilities { background: rgba(245,158,11,0.06); border-color: #f59e0b; }
+  .ps-capabilities .prompt-section-title { color: #f59e0b; }
+  .ps-approach { background: rgba(59,130,246,0.06); border-color: #3b82f6; }
+  .ps-approach .prompt-section-title { color: #3b82f6; }
+  .ps-rules { background: rgba(236,72,153,0.06); border-color: #ec4899; }
+  .ps-rules .prompt-section-title { color: #ec4899; }
+  .ps-constraints { background: rgba(239,68,68,0.06); border-color: #ef4444; }
+  .ps-constraints .prompt-section-title { color: #ef4444; }
+  .ps-output { background: rgba(139,92,246,0.06); border-color: #8b5cf6; }
+  .ps-output .prompt-section-title { color: #8b5cf6; }
+
+  /* ── Feature Bars ── */
+  .features-card { grid-column: 2 / 4; }
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px 24px;
+  }
+  .feat-row {
+    display: flex; align-items: center; gap: 8px;
+    padding: 5px 0;
+  }
+  .feat-name { font-size: 11px; color: #64748b; width: 120px; flex-shrink: 0; text-align: right; }
+  .feat-bar-bg {
+    flex: 1; height: 8px; background: #f1f5f9; border-radius: 4px;
+    overflow: hidden;
+  }
+  .feat-bar-fill {
+    height: 100%; border-radius: 4px;
+    transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 0;
+  }
+  .feat-val { font-size: 11px; font-weight: 700; min-width: 36px; }
+  .feat-na { font-size: 10px; color: #94a3b8; font-style: italic; }
+
+  /* ── Ranking Cards ── */
+  .ranking-row {
+    grid-column: 1 / 4;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .rank-card {
+    background: white; border-radius: 16px; padding: 18px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .rank-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 4px;
+  }
+  .rank-emoji { font-size: 26px; margin-bottom: 6px; }
+  .rank-label { font-size: 10px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .rank-feature { font-size: 12px; font-weight: 700; color: #1e293b; }
+  .rank-val { font-size: 22px; font-weight: 900; margin-top: 4px; }
+
+  .rank-best::before { background: linear-gradient(90deg, #10b981, #34d399); }
+  .rank-best .rank-val { color: #10b981; }
+  .rank-good::before { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+  .rank-good .rank-val { color: #3b82f6; }
+  .rank-weak::before { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+  .rank-weak .rank-val { color: #f59e0b; }
+  .rank-worst::before { background: linear-gradient(90deg, #ef4444, #f87171); }
+  .rank-worst .rank-val { color: #ef4444; }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    padding: 16px;
+    color: #94a3b8;
+    font-size: 11px;
+    margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ════ NAVBAR ════ -->
+<div class="navbar">
+  <div class="nav-brand">AGENT DASHBOARD</div>
+  <div class="nav-tabs">
+    <div class="nav-tab active" data-tab="A">Grup A — BigTech+Dept <span class="tab-score">%63.1</span></div>
+    <div class="nav-tab" data-tab="B">Grup B — Company Only <span class="tab-score">%50.6</span></div>
+    <div class="nav-tab" data-tab="C">Grup C — Independent <span class="tab-score">%59.9</span></div>
+    <div class="nav-tab" data-tab="D">Grup D — Non-Technical <span class="tab-score">%47.1</span></div>
+  </div>
+</div>
+
+<div class="dashboard-wrapper">
+
+<!-- ════════════════════════════════════════════ -->
+<!-- ════ GRUP A ════ -->
+<!-- ════════════════════════════════════════════ -->
+<div class="tab-content active" id="tab-A">
+<div class="dashboard">
+  <div class="top-row">
+    <div class="card profile-card">
+      <div class="group-badge">#1 / 25 — GRUP A</div>
+      <div class="company-badge">GOOGLE</div>
+      <div class="overall-circle">
+        <svg width="130" height="130" viewBox="0 0 130 130">
+          <circle cx="65" cy="65" r="58" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="7"/>
+          <circle cx="65" cy="65" r="58" fill="none" stroke="url(#gA)" stroke-width="7"
+                  stroke-dasharray="364.4" stroke-dashoffset="134.5" stroke-linecap="round"
+                  transform="rotate(-90 65 65)"/>
+          <defs><linearGradient id="gA" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fbbf24"/><stop offset="100%" stop-color="#f59e0b"/>
+          </linearGradient></defs>
+        </svg>
+        <span class="overall-number">63</span>
+        <span class="overall-label">Overall</span>
+      </div>
+      <div class="agent-name">Staff UX Engineer</div>
+      <div class="agent-role">Frontend Engineering Dept | 9 Yrs Exp</div>
+      <div class="mini-stats">
+        <div class="mini-stat"><div class="mini-stat-val">29</div><div class="mini-stat-label">Features</div></div>
+        <div class="mini-stat"><div class="mini-stat-val">7.7</div><div class="mini-stat-label">Prompt Avg</div></div>
+        <div class="mini-stat"><div class="mini-stat-val">6.4</div><div class="mini-stat-label">Mean Score</div></div>
+        <div class="mini-stat"><div class="mini-stat-val">#1</div><div class="mini-stat-label">Grup A Rank</div></div>
+      </div>
+    </div>
+    <div class="card radar-card">
+      <div class="card-title">Category Radar</div>
+      <canvas class="radar-canvas" id="radarA"></canvas>
+    </div>
+  </div>
+
+  <div class="card prompt-card">
+    <div class="card-title">Agent Prompt</div>
+    <div class="prompt-section ps-role">
+      <div class="prompt-section-title">Role</div>
+      <div class="prompt-section-body">You are a Staff UX Engineer at Google with 9 years of experience at the intersection of design and engineering. You build design systems, define component APIs, and collaborate with both product designers and backend engineers. You hold yourself and projects to Google's Material Design standards and engineering bar.</div>
+    </div>
+    <div class="prompt-section ps-context">
+      <div class="prompt-section-title">Context</div>
+      <div class="prompt-section-body"><ul>
+        <li>The project is a frontend web project provided as input.</li>
+        <li>You will receive screenshots, a project description, and a features manifest.</li>
+        <li>Accustomed to evaluating large-scale consumer products; this is smaller-scale.</li>
+        <li>Adjust your standard to the context: expect pragmatic decisions.</li>
+        <li>Your evaluation will be compared to other expert and non-expert evaluators.</li>
+      </ul></div>
+    </div>
+    <div class="prompt-section ps-capabilities">
+      <div class="prompt-section-title">Capabilities</div>
+      <div class="prompt-section-body"><ul>
+        <li>Expert knowledge of Material Design system and Google's frontend standards</li>
+        <li>Strong ability to evaluate component API design and reusability</li>
+        <li>Proficiency in assessing design token usage, theming consistency</li>
+        <li>Competence in identifying animation quality, micro-interactions</li>
+        <li>Deep understanding of accessibility requirements (ARIA, keyboard nav)</li>
+        <li>Skill in evaluating responsive behavior across screen sizes</li>
+        <li>Ability to infer state management quality from UI feedback patterns</li>
+      </ul></div>
+    </div>
+    <div class="prompt-section ps-approach">
+      <div class="prompt-section-title">Task Approach</div>
+      <div class="prompt-section-body"><ol>
+        <li>View all screenshots with both engineering and design lenses.</li>
+        <li>Read the project description for purpose and constraints.</li>
+        <li>Consult the features manifest for claimed implementations.</li>
+        <li>For each feature: "Would this pass our internal bar?"</li>
+        <li>Note where design and engineering diverge.</li>
+        <li>Reward thoughtful design decisions even when imperfect.</li>
+        <li>Assign an integer score from 1 to 10 for each feature.</li>
+      </ol></div>
+    </div>
+    <div class="prompt-section ps-rules">
+      <div class="prompt-section-title">Rules</div>
+      <div class="prompt-section-body"><ul>
+        <li>Score all 30 features without exception.</li>
+        <li>Apply equal rigor to design and engineering features.</li>
+        <li>Give credit for visible evidence of good structure.</li>
+        <li>Evaluate Animation/Theming intent and execution separately.</li>
+        <li>First score sets anchor for all subsequent scores.</li>
+      </ul></div>
+    </div>
+    <div class="prompt-section ps-constraints">
+      <div class="prompt-section-title">Constraints</div>
+      <div class="prompt-section-body"><ul>
+        <li>DO NOT apply Google-scale expectations without adjustment.</li>
+        <li>DO NOT assume missing features are implemented.</li>
+        <li>DO NOT return any output except the JSON object.</li>
+        <li>DO NOT score above 5 for features with zero evidence.</li>
+        <li>DO NOT include subjective commentary.</li>
+      </ul></div>
+    </div>
+    <div class="prompt-section ps-output">
+      <div class="prompt-section-title">Output Format</div>
+      <div class="prompt-section-body"><ul>
+        <li>Return a single JSON object with exactly 30 keys.</li>
+        <li>All values: integers 1-10.</li>
+        <li>Example: {"UI": 8, "UX": 7, ...}</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="card features-card">
+    <div class="card-title">All 29 Features — Oznitelik Scores</div>
+    <div class="features-grid" id="featA"></div>
+  </div>
+
+  <div class="ranking-row">
+    <div class="rank-card rank-best"><div class="rank-emoji">&#127942;</div><div class="rank-label">Strongest</div><div class="rank-feature">Theming</div><div class="rank-val">86.6%</div></div>
+    <div class="rank-card rank-good"><div class="rank-emoji">&#11088;</div><div class="rank-label">2nd Best</div><div class="rank-feature">UI / Visual Design</div><div class="rank-val">82.1%</div></div>
+    <div class="rank-card rank-weak"><div class="rank-emoji">&#9888;&#65039;</div><div class="rank-label">Weakest 2nd</div><div class="rank-feature">Error Handling</div><div class="rank-val">41.1%</div></div>
+    <div class="rank-card rank-worst"><div class="rank-emoji">&#10060;</div><div class="rank-label">Weakest</div><div class="rank-feature">Empty States</div><div class="rank-val">33.0%</div></div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- ════ GRUP B ════ -->
+<!-- ════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-B">
+<div class="dashboard">
+  <div class="top-row">
+    <div class="card profile-card">
+      <div class="group-badge">#1 / 25 — GRUP B</div>
+      <div class="company-badge">VERCEL</div>
+      <div class="overall-circle">
+        <svg width="130" height="130" viewBox="0 0 130 130">
+          <circle cx="65" cy="65" r="58" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="7"/>
+          <circle cx="65" cy="65" r="58" fill="none" stroke="url(#gB)" stroke-width="7"
+                  stroke-dasharray="364.4" stroke-dashoffset="180.0" stroke-linecap="round"
+                  transform="rotate(-90 65 65)"/>
+          <defs><linearGradient id="gB" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fbbf24"/><stop offset="100%" stop-color="#f59e0b"/>
+          </linearGradient></defs>
+        </svg>
+        <span class="overall-number">51</span>
+        <span class="overall-label">Overall</span>
+      </div>
+      <div class="agent-name">Full-Stack Developer</div>
+      <div class="agent-role">Vercel | 2 Yrs Exp</div>
+      <div class="mini-stats">
+        <div class="mini-stat"><div class="mini-stat-val">29</div><div class="mini-stat-label">Features</div></div>
+        <div class="mini-stat"><div class="mini-stat-val">6.3</div><div class="mini-stat-label">Prompt Avg</div></div>
+        <div class="mini-stat"><div class="mini-stat-val">6.3</div><div class="mini-stat-label">Mean Score</div></div>
+        <div class="mini-stat"><div class="mini-stat-val">#1</div><div class="mini-stat-label">Grup B Rank</div></div>
+      </div>
+    </div>
+    <div class="card radar-card">
+      <div class="card-title">Category Radar</div>
+      <canvas class="radar-canvas" id="radarB"></canvas>
+    </div>
+  </div>
+
+  <div class="card prompt-card">
+    <div class="card-title">Agent Prompt</div>
+    <div class="prompt-section ps-role">
+      <div class="prompt-section-title">Role</div>
+      <div class="prompt-section-body">You are a Full-Stack Developer at Vercel with 2 years of professional experience. You work primarily with Next.js, React, and serverless edge functions. You care deeply about developer experience, deployment ergonomics, and modern web performance.</div>
+    </div>
+    <div class="prompt-section ps-context">
+      <div class="prompt-section-title">Context</div>
+      <div class="prompt-section-body"><ul>
+        <li>The project is a frontend web project provided as input.</li>
+        <li>You will receive screenshots, description, and features manifest.</li>
+        <li>You approach this as a developer who builds modern web apps.</li>
+        <li>Strong opinions on performance/architecture, moderate on visual design.</li>
+        <li>Your scores will be compared to expert and non-expert evaluators.</li>
+      </ul></div>
+    </div>
+    <div class="prompt-section ps-capabilities">
+      <div class="prompt-section-title">Capabilities</div>
+      <div class="prompt-section-body"><ul>
+        <li>Solid React and Next.js development experience</li>
+        <li>Understanding of frontend performance (Core Web Vitals, lazy loading)</li>
+        <li>Ability to assess component architecture from visual patterns</li>
+        <li>Familiarity with modern design conventions (clean layouts, dark mode)</li>
+        <li>Basic UX evaluation from a developer's practical perspective</li>
+        <li>Competence in assessing API integration patterns</li>
+      </ul></div>
+    </div>
+    <div class="prompt-section ps-approach">
+      <div class="prompt-section-title">Task Approach</div>
+      <div class="prompt-section-body"><ol>
+        <li>Look through all screenshots as reviewing a colleague's side project.</li>
+        <li>Read the description for scope and tech choices.</li>
+        <li>Check features manifest for verifiable claims.</li>
+        <li>For each feature: "Would I be comfortable shipping this?"</li>
+        <li>Score generously for fundamentals, critically for missing error states.</li>
+        <li>Assign an integer from 1 to 10 for each feature.</li>
+      </ol></div>
+    </div>
+    <div class="prompt-section ps-rules">
+      <div class="prompt-section-title">Rules</div>
+      <div class="prompt-section-body"><ul>
+        <li>Score all 30 features.</li>
+        <li>Be honest about features outside your expertise.</li>
+        <li>Reward clean, readable interfaces.</li>
+        <li>Penalize poor error handling and inconsistent layouts.</li>
+        <li>Do not over-inflate scores for a small project.</li>
+      </ul></div>
+    </div>
+    <div class="prompt-section ps-constraints">
+      <div class="prompt-section-title">Constraints</div>
+      <div class="prompt-section-body"><ul>
+        <li>DO NOT assume code quality from visual appearance alone.</li>
+        <li>DO NOT score features with no visible evidence above 5.</li>
+        <li>DO NOT return any text except the JSON object.</li>
+        <li>DO NOT add fields beyond the 30 score_fields.</li>
+      </ul></div>
+    </div>
+    <div class="prompt-section ps-output">
+      <div class="prompt-section-title">Output Format</div>
+      <div class="prompt-section-body"><ul>
+        <li>Return a single JSON object with exactly 30 keys.</li>
+        <li>All values: integers 1-10.</li>
+        <li>Example: {"UI": 6, "UX": 6, ...}</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="card features-card">
+    <div class="card-title">All 29 Features — Oznitelik Scores</div>
+    <div class="features-grid" id="featB"></div>
+  </div>
+
+  <div class="ranking-row">
+    <div class="rank-card rank-best"><div class="rank-emoji">&#127942;</div><div class="rank-label">Strongest</div><div class="rank-feature">Theming</div><div class="rank-val">70.9%</div></div>
+    <div class="rank-card rank-good"><div class="rank-emoji">&#11088;</div><div class="rank-label">2nd Best</div><div class="rank-feature">Performance</div><div class="rank-val">67.8%</div></div>
+    <div class="rank-card rank-weak"><div class="rank-emoji">&#9888;&#65039;</div><div class="rank-label">Weakest 2nd</div><div class="rank-feature">Domain Knowledge</div><div class="rank-val">31.5%</div></div>
+    <div class="rank-card rank-worst"><div class="rank-emoji">&#10060;</div><div class="rank-label">Weakest</div><div class="rank-feature">Empty States</div><div class="rank-val">27.0%</div></div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- ════ GRUP C ════ -->
+<!-- ════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-C">
+<div class="dashboard">
+  <div class="top-row">
+    <div class="card profile-card">
+      <div class="group-badge">#1 / 40 — GRUP C</div>
+      <div class="company-badge">INDEPENDENT</div>
+      <div class="overall-circle">
+        <svg width="130" height="130" viewBox="0 0 130 130">
+          <circle cx="65" cy="65" r="58" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="7"/>
+          <circle cx="65" cy="65" r="58" fill="none" stroke="url(#gC)" stroke-width="7"
+                  stroke-dasharray="364.4" stroke-dashoffset="146.1" stroke-linecap="round"
+                  transform="rotate(-90 65 65)"/>
+          <defs><linearGradient id="gC" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fbbf24"/><stop offset="100%" stop-color="#f59e0b"/>
+          </linearGradient></defs>
+        </svg>
+        <span class="overall-number">60</span>
+        <span class="overall-label">Overall</span>
+      </div>
+      <div class="agent-name">HCI Professor</div>
+      <div class="agent-role">Turkish University | 20 Yrs Academic Exp</div>
+      <div class="mini-stats">
+        <div class="mini-stat"><div class="mini-stat-val">29</div><div class="mini-stat-label">Features</div></div>
+        <div class="mini-stat"><div class="mini-stat-val">8.8</div><div class="mini-stat-label">Prompt Avg</div></div>
+        <div class="mini-stat"><div class="mini-stat-val">5.3</div><div class="mini-stat-label">Mean Score</div></div>
+        <div class="mini-stat"><div class="mini-stat-val">#1</div><div class="mini-stat-label">Grup C Rank</div></div>
+      </div>
+    </div>
+    <div class="card radar-card">
+      <div class="card-title">Category Radar</div>
+      <canvas class="radar-canvas" id="radarC"></canvas>
+    </div>
+  </div>
+
+  <div class="card prompt-card">
+    <div class="card-title">Agent Prompt</div>
+    <div class="prompt-section ps-role">
+      <div class="prompt-section-title">Role</div>
+      <div class="prompt-section-body">You are a Professor of Human-Computer Interaction (HCI) at a Turkish university with 20 years of academic and research experience. You have published extensively on usability, accessibility, and user-centered design. Your evaluation methodology is rigorous, systematic, and grounded in academic frameworks (ISO 9241, Nielsen heuristics, WCAG standards).</div>
+    </div>
+    <div class="prompt-section ps-context">
+      <div class="prompt-section-title">Context</div>
+      <div class="prompt-section-body"><ul>
+        <li>The project is a frontend web project provided as input.</li>
+        <li>You will receive screenshots, description, and features manifest.</li>
+        <li>Evaluate as a formal usability expert: systematically, methodically.</li>
+        <li>Especially authoritative on: Accessibility, UX, Navigation, Consistency, Typography.</li>
+        <li>For engineering features, theoretical understanding but not practitioner depth.</li>
+        <li>Scores will be compared to industry practitioners and students.</li>
+      </ul></div>
+    </div>
+    <div class="prompt-section ps-capabilities">
+      <div class="prompt-section-title">Capabilities</div>
+      <div class="prompt-section-body"><ul>
+        <li>Expert-level usability evaluation using ISO 9241-11 and Nielsen's heuristics</li>
+        <li>Deep understanding of WCAG 2.1 A/AA/AAA criteria</li>
+        <li>Evaluate information architecture, mental models, cognitive load</li>
+        <li>Strong competence in typography for readability</li>
+        <li>Theoretical knowledge of software engineering quality attributes</li>
+        <li>Experience with heuristic evaluations of educational software</li>
+        <li>Competence in domain appropriateness for university systems</li>
+        <li>Understanding of user testing methodology</li>
+        <li>Assess consistency using gestalt principles and visual perception</li>
+      </ul></div>
+    </div>
+    <div class="prompt-section ps-approach">
+      <div class="prompt-section-title">Task Approach</div>
+      <div class="prompt-section-body"><ol>
+        <li>Treat this as a formal heuristic evaluation.</li>
+        <li>Read description and features manifest as background.</li>
+        <li>Examine all screenshots, noting usability issues at each screen.</li>
+        <li>Map observations to each feature using evaluation framework.</li>
+        <li>Apply strongest rigor to UX, Accessibility, Navigation, Consistency, Typography.</li>
+        <li>For engineering features, apply academic understanding.</li>
+        <li>Score each feature 1-10, guided by established criteria.</li>
+        <li>Maintain scientific objectivity.</li>
+      </ol></div>
+    </div>
+    <div class="prompt-section ps-rules">
+      <div class="prompt-section-title">Rules</div>
+      <div class="prompt-section-body"><ul>
+        <li>Score all 30 features; leave none unscored.</li>
+        <li>Apply formal evaluation criteria where they exist.</li>
+        <li>Be especially rigorous on Accessibility.</li>
+        <li>For features beyond expertise, use theoretical knowledge.</li>
+        <li>Avoid grade inflation: 10 = exceptional international standards.</li>
+        <li>Cross-check consistency between related features.</li>
+        <li>Use 98 only for genuinely inaccessible features.</li>
+      </ul></div>
+    </div>
+    <div class="prompt-section ps-constraints">
+      <div class="prompt-section-title">Constraints</div>
+      <div class="prompt-section-body"><ul>
+        <li>DO NOT let personal preference override usability evidence.</li>
+        <li>DO NOT assume technical implementations beyond visible.</li>
+        <li>DO NOT score unknowns above 5 without evidence.</li>
+        <li>DO NOT return any output other than the JSON.</li>
+        <li>DO NOT include extra keys or nested structures.</li>
+      </ul></div>
+    </div>
+    <div class="prompt-section ps-output">
+      <div class="prompt-section-title">Output Format</div>
+      <div class="prompt-section-body"><ul>
+        <li>Return a single JSON object with exactly 30 keys.</li>
+        <li>Values: integers 1-10 (or 98 for genuinely inaccessible).</li>
+        <li>Example: {"UI": 7, "UX": 8, ...}</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="card features-card">
+    <div class="card-title">All 29 Features — Oznitelik Scores</div>
+    <div class="features-grid" id="featC"></div>
+  </div>
+
+  <div class="ranking-row">
+    <div class="rank-card rank-best"><div class="rank-emoji">&#127942;</div><div class="rank-label">Strongest</div><div class="rank-feature">Theming / Consistency</div><div class="rank-val">88.0%</div></div>
+    <div class="rank-card rank-good"><div class="rank-emoji">&#11088;</div><div class="rank-label">2nd Best</div><div class="rank-feature">UI / Visual / Loading</div><div class="rank-val">82.1%</div></div>
+    <div class="rank-card rank-weak"><div class="rank-emoji">&#9888;&#65039;</div><div class="rank-label">Weakest 2nd</div><div class="rank-feature">Error Handling</div><div class="rank-val">35.2%</div></div>
+    <div class="rank-card rank-worst"><div class="rank-emoji">&#10060;</div><div class="rank-label">Weakest</div><div class="rank-feature">Empty States</div><div class="rank-val">25.1%</div></div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- ════ GRUP D ════ -->
+<!-- ════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-D">
+<div class="dashboard">
+  <div class="top-row">
+    <div class="card profile-card">
+      <div class="group-badge">#1 / 10 — GRUP D</div>
+      <div class="company-badge">NON-TECHNICAL</div>
+      <div class="overall-circle">
+        <svg width="130" height="130" viewBox="0 0 130 130">
+          <circle cx="65" cy="65" r="58" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="7"/>
+          <circle cx="65" cy="65" r="58" fill="none" stroke="url(#gD)" stroke-width="7"
+                  stroke-dasharray="364.4" stroke-dashoffset="192.7" stroke-linecap="round"
+                  transform="rotate(-90 65 65)"/>
+          <defs><linearGradient id="gD" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fbbf24"/><stop offset="100%" stop-color="#f59e0b"/>
+          </linearGradient></defs>
+        </svg>
+        <span class="overall-number">47</span>
+        <span class="overall-label">Overall</span>
+      </div>
+      <div class="agent-name">Accountant</div>
+      <div class="agent-role">Non-Technical Control | 25 Yrs Exp</div>
+      <div class="mini-stats">
+        <div class="mini-stat"><div class="mini-stat-val">13</div><div class="mini-stat-label">Features</div></div>
+        <div class="mini-stat"><div class="mini-stat-val">6.6</div><div class="mini-stat-label">Prompt Avg</div></div>
+        <div class="mini-stat"><div class="mini-stat-val">5.5</div><div class="mini-stat-label">Mean Score</div></div>
+        <div class="mini-stat"><div class="mini-stat-val">#1</div><div class="mini-stat-label">Grup D Rank</div></div>
+      </div>
+    </div>
+    <div class="card radar-card">
+      <div class="card-title">Category Radar</div>
+      <canvas class="radar-canvas" id="radarD"></canvas>
+    </div>
+  </div>
+
+  <div class="card prompt-card">
+    <div class="card-title">Agent Prompt</div>
+    <div class="prompt-section ps-role">
+      <div class="prompt-section-title">Role</div>
+      <div class="prompt-section-body">You are an Accountant with 25 years of professional experience managing financial records, tax filings, and business accounts. You are comfortable with Excel and accounting software but have zero programming knowledge. You use websites and web applications daily as an ordinary user.</div>
+    </div>
+    <div class="prompt-section ps-context">
+      <div class="prompt-section-title">Context</div>
+      <div class="prompt-section-body"><ul>
+        <li>The project is a frontend web project provided as input.</li>
+        <li>You will receive screenshots, description, and features manifest.</li>
+        <li>Evaluate purely as a user: professional? Clear? Trustworthy?</li>
+        <li>Most technical features are outside your domain — use 98 liberally.</li>
+        <li>You represent the "naive user" control group in this study.</li>
+      </ul></div>
+    </div>
+    <div class="prompt-section ps-capabilities">
+      <div class="prompt-section-title">Capabilities</div>
+      <div class="prompt-section-body"><ul>
+        <li>Judge whether an interface looks professional and trustworthy</li>
+        <li>Say whether navigation feels clear or confusing</li>
+        <li>Basic judgment of visual cleanliness from office software perspective</li>
+        <li>Recognition of whether a form is clear and complete</li>
+        <li>Absolutely no technical knowledge (no programming, no CSS)</li>
+        <li>No knowledge of professional design concepts</li>
+      </ul></div>
+    </div>
+    <div class="prompt-section ps-approach">
+      <div class="prompt-section-title">Task Approach</div>
+      <div class="prompt-section-body"><ol>
+        <li>Look at the screenshots as any regular person would.</li>
+        <li>Ask: "Does this look professional? Would I trust it?"</li>
+        <li>Read the description to understand what it's supposed to do.</li>
+        <li>Score the things you can see and judge as a user.</li>
+        <li>Use 98 for everything you do not understand.</li>
+        <li>Assign integer 1-10 for evaluable, 98 for everything else.</li>
+      </ol></div>
+    </div>
+    <div class="prompt-section ps-rules">
+      <div class="prompt-section-title">Rules</div>
+      <div class="prompt-section-body"><ul>
+        <li>Score all 30 features — 98 expected for majority of technical features.</li>
+        <li>Be genuinely honest about what you can and cannot judge.</li>
+        <li>Score based only on what you see as a user.</li>
+        <li>Do not try to guess technical quality.</li>
+      </ul></div>
+    </div>
+    <div class="prompt-section ps-constraints">
+      <div class="prompt-section-title">Constraints</div>
+      <div class="prompt-section-body"><ul>
+        <li>DO NOT pretend to understand Code Quality, State Mgmt, Data Structures, Testing, Security, API, Scalability, Performance, Reusability, Animation — use 98.</li>
+        <li>DO NOT return anything except the JSON.</li>
+        <li>DO NOT add extra keys.</li>
+      </ul></div>
+    </div>
+    <div class="prompt-section ps-output">
+      <div class="prompt-section-title">Output Format</div>
+      <div class="prompt-section-body"><ul>
+        <li>Return a single JSON object with exactly 30 keys.</li>
+        <li>Values: integers 1-10 (or 98 for genuinely unknown).</li>
+        <li>Expect 98 for 15-20 of the 30 features.</li>
+        <li>Example: {"UI": 7, "UX": 6, ...}</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="card features-card">
+    <div class="card-title">13 Scored Features — Oznitelik Scores</div>
+    <div class="features-grid" id="featD"></div>
+  </div>
+
+  <div class="ranking-row">
+    <div class="rank-card rank-best"><div class="rank-emoji">&#127942;</div><div class="rank-label">Strongest</div><div class="rank-feature">UI / Visual Design</div><div class="rank-val">61.6%</div></div>
+    <div class="rank-card rank-good"><div class="rank-emoji">&#11088;</div><div class="rank-label">2nd Best</div><div class="rank-feature">Theming / Consistency</div><div class="rank-val">57.7%</div></div>
+    <div class="rank-card rank-weak"><div class="rank-emoji">&#9888;&#65039;</div><div class="rank-label">Weakest 2nd</div><div class="rank-feature">Documentation</div><div class="rank-val">33.0%</div></div>
+    <div class="rank-card rank-worst"><div class="rank-emoji">&#10060;</div><div class="rank-label">Weakest</div><div class="rank-feature">Empty States</div><div class="rank-val">28.3%</div></div>
+  </div>
+</div>
+</div>
+
+<!-- ════ Footer ════ -->
+<div class="footer">
+  LLM Sub-Agent'larinda Rol Muhendisligi ve Degerlendirme Tutarliligi: Feature Selection Calismasi | 2026
+</div>
+</div>
+
+<script>
+// ════ Tab Switching ════
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+    // Re-draw radar & animate bars for newly visible tab
+    setTimeout(() => {
+      drawRadar(tab.dataset.tab);
+      animateBars(tab.dataset.tab);
+    }, 50);
+  });
+});
+
+// ════ Feature Data ════
+const allFeatures = {
+  A: [
+    {name:"UI", val:82.1}, {name:"UX", val:71.9}, {name:"Visual Design", val:82.1},
+    {name:"Responsive", val:57.8}, {name:"Accessibility", val:51.3}, {name:"Typography", val:72.5},
+    {name:"Animation", val:59.2}, {name:"Theming", val:86.6}, {name:"Code Quality", val:59.9},
+    {name:"Performance", val:71.1}, {name:"Data Structures", val:57.8}, {name:"Comp. Arch", val:68.4},
+    {name:"State Mgmt", val:63.4}, {name:"Security", val:55.0}, {name:"Error Handling", val:41.1},
+    {name:"Reusability", val:68.4}, {name:"Functionality", val:54.4}, {name:"Form Validation", val:48.1},
+    {name:"Navigation", val:68.4}, {name:"Consistency", val:77.0}, {name:"Loading States", val:82.1},
+    {name:"Empty States", val:33.0}, {name:"Domain Know.", val:77.0}, {name:"Innovation", val:48.1},
+    {name:"Maintainability", val:67.4}, {name:"Testing", val:57.8}, {name:"Documentation", val:48.1},
+    {name:"API Integration", val:67.4}, {name:"Scalability", val:51.3}
+  ],
+  B: [
+    {name:"UI", val:58.8}, {name:"UX", val:58.8}, {name:"Visual Design", val:58.8},
+    {name:"Responsive", val:47.2}, {name:"Accessibility", val:42.0}, {name:"Typography", val:51.9},
+    {name:"Animation", val:48.5}, {name:"Theming", val:70.9}, {name:"Code Quality", val:49.0},
+    {name:"Performance", val:67.8}, {name:"Data Structures", val:47.2}, {name:"Comp. Arch", val:56.0},
+    {name:"State Mgmt", val:59.3}, {name:"Security", val:54.0}, {name:"Error Handling", val:33.6},
+    {name:"Reusability", val:56.0}, {name:"Functionality", val:44.5}, {name:"Form Validation", val:39.4},
+    {name:"Navigation", val:49.0}, {name:"Consistency", val:63.0}, {name:"Loading States", val:67.2},
+    {name:"Empty States", val:27.0}, {name:"Domain Know.", val:31.5}, {name:"Innovation", val:39.4},
+    {name:"Maintainability", val:55.1}, {name:"Testing", val:47.2}, {name:"Documentation", val:39.4},
+    {name:"API Integration", val:55.1}, {name:"Scalability", val:49.0}
+  ],
+  C: [
+    {name:"UI", val:82.1}, {name:"UX", val:82.1}, {name:"Visual Design", val:82.1},
+    {name:"Responsive", val:66.0}, {name:"Accessibility", val:46.9}, {name:"Typography", val:72.5},
+    {name:"Animation", val:67.7}, {name:"Theming", val:88.0}, {name:"Code Quality", val:48.9},
+    {name:"Performance", val:67.7}, {name:"Data Structures", val:55.0}, {name:"Comp. Arch", val:48.9},
+    {name:"State Mgmt", val:51.8}, {name:"Security", val:62.9}, {name:"Error Handling", val:35.2},
+    {name:"Reusability", val:48.9}, {name:"Functionality", val:62.1}, {name:"Form Validation", val:44.0},
+    {name:"Navigation", val:68.4}, {name:"Consistency", val:88.0}, {name:"Loading States", val:82.1},
+    {name:"Empty States", val:25.1}, {name:"Domain Know.", val:58.7}, {name:"Innovation", val:44.0},
+    {name:"Maintainability", val:55.0}, {name:"Testing", val:55.0}, {name:"Documentation", val:44.0},
+    {name:"API Integration", val:55.0}, {name:"Scalability", val:48.9}
+  ],
+  D: [
+    {name:"UI", val:61.6}, {name:"UX", val:52.8}, {name:"Visual Design", val:61.6},
+    {name:"Responsive", val:null}, {name:"Accessibility", val:null}, {name:"Typography", val:null},
+    {name:"Animation", val:null}, {name:"Theming", val:57.7}, {name:"Code Quality", val:null},
+    {name:"Performance", val:null}, {name:"Data Structures", val:null}, {name:"Comp. Arch", val:null},
+    {name:"State Mgmt", val:null}, {name:"Security", val:null}, {name:"Error Handling", val:35.2},
+    {name:"Reusability", val:null}, {name:"Functionality", val:46.6}, {name:"Form Validation", val:41.2},
+    {name:"Navigation", val:51.3}, {name:"Consistency", val:57.7}, {name:"Loading States", val:52.8},
+    {name:"Empty States", val:28.3}, {name:"Domain Know.", val:33.0}, {name:"Innovation", val:null},
+    {name:"Maintainability", val:null}, {name:"Testing", val:null}, {name:"Documentation", val:33.0},
+    {name:"API Integration", val:null}, {name:"Scalability", val:null}
+  ]
+};
+
+// Radar category averages
+const radarData = {
+  A: [{name:'Visual',val:75.7,color:'#ef4444'},{name:'Code',val:65.5,color:'#3b82f6'},{name:'Infra',val:57.2,color:'#10b981'},{name:'UX/Func',val:57.2,color:'#8b5cf6'},{name:'Domain',val:62.5,color:'#f59e0b'},{name:'Tech',val:56.2,color:'#ec4899'}],
+  B: [{name:'Visual',val:57.9,color:'#ef4444'},{name:'Code',val:55.1,color:'#3b82f6'},{name:'Infra',val:51.9,color:'#10b981'},{name:'UX/Func',val:45.4,color:'#8b5cf6'},{name:'Domain',val:43.3,color:'#f59e0b'},{name:'Tech',val:45.9,color:'#ec4899'}],
+  C: [{name:'Visual',val:79.1,color:'#ef4444'},{name:'Code',val:50.7,color:'#3b82f6'},{name:'Infra',val:53.9,color:'#10b981'},{name:'UX/Func',val:56.3,color:'#8b5cf6'},{name:'Domain',val:58.7,color:'#f59e0b'},{name:'Tech',val:55.7,color:'#ec4899'}],
+  D: [{name:'Visual',val:58.4,color:'#ef4444'},{name:'Code',val:0,color:'#3b82f6'},{name:'Infra',val:35.2,color:'#10b981'},{name:'UX/Func',val:44.0,color:'#8b5cf6'},{name:'Domain',val:41.2,color:'#f59e0b'},{name:'Tech',val:0,color:'#ec4899'}]
+};
+
+function getColor(v) {
+  if (v >= 75) return '#10b981';
+  if (v >= 60) return '#3b82f6';
+  if (v >= 45) return '#f59e0b';
+  return '#ef4444';
+}
+
+// ════ Build Feature Bars ════
+function buildFeatures(group) {
+  const grid = document.getElementById('feat' + group);
+  grid.innerHTML = '';
+  allFeatures[group].forEach(f => {
+    const row = document.createElement('div');
+    row.className = 'feat-row';
+    if (f.val === null) {
+      row.innerHTML = `
+        <div class="feat-name">${f.name}</div>
+        <div class="feat-bar-bg"><div class="feat-bar-fill" style="background:#e2e8f0;width:100%;opacity:0.3"></div></div>
+        <div class="feat-na">N/A (98)</div>`;
+    } else {
+      row.innerHTML = `
+        <div class="feat-name">${f.name}</div>
+        <div class="feat-bar-bg">
+          <div class="feat-bar-fill" data-group="${group}" data-width="${f.val}" style="background:${getColor(f.val)}"></div>
+        </div>
+        <div class="feat-val" style="color:${getColor(f.val)}">${f.val}%</div>`;
+    }
+    grid.appendChild(row);
+  });
+}
+
+function animateBars(group) {
+  document.querySelectorAll(`[data-group="${group}"]`).forEach(el => {
+    el.style.width = '0%';
+    setTimeout(() => { el.style.width = el.dataset.width + '%'; }, 50);
+  });
+}
+
+['A','B','C','D'].forEach(g => buildFeatures(g));
+setTimeout(() => animateBars('A'), 100);
+
+// ════ Radar Drawing ════
+function drawRadar(group) {
+  const canvas = document.getElementById('radar' + group);
+  if (!canvas || !canvas.offsetWidth) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width = canvas.offsetWidth * 2;
+  const H = canvas.height = canvas.offsetHeight * 2;
+  ctx.scale(2, 2);
+  const w = W/2, h = H/2;
+  const cx = w/2, cy = h/2 + 5;
+  const R = Math.min(w, h) * 0.36;
+
+  const cats = radarData[group];
+  const n = cats.length;
+
+  ctx.clearRect(0, 0, w, h);
+
+  // Grid
+  [0.2, 0.4, 0.6, 0.8, 1.0].forEach(pct => {
+    ctx.beginPath();
+    for (let i = 0; i <= n; i++) {
+      const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+      const x = cx + R * pct * Math.cos(angle);
+      const y = cy + R * pct * Math.sin(angle);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.closePath();
+    ctx.strokeStyle = 'rgba(0,0,0,0.06)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  });
+
+  // Axes
+  for (let i = 0; i < n; i++) {
+    const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + R * Math.cos(angle), cy + R * Math.sin(angle));
+    ctx.strokeStyle = 'rgba(0,0,0,0.06)';
+    ctx.stroke();
+  }
+
+  // Data polygon
+  ctx.beginPath();
+  cats.forEach((cat, i) => {
+    const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+    const r = R * (cat.val / 100);
+    const x = cx + r * Math.cos(angle);
+    const y = cy + r * Math.sin(angle);
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  });
+  ctx.closePath();
+  const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, R);
+  grad.addColorStop(0, 'rgba(251,191,36,0.25)');
+  grad.addColorStop(1, 'rgba(245,158,11,0.08)');
+  ctx.fillStyle = grad;
+  ctx.fill();
+  ctx.strokeStyle = '#f59e0b';
+  ctx.lineWidth = 2.5;
+  ctx.stroke();
+
+  // Points & labels
+  cats.forEach((cat, i) => {
+    const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+    const r = R * (cat.val / 100);
+    const x = cx + r * Math.cos(angle);
+    const y = cy + r * Math.sin(angle);
+
+    ctx.beginPath();
+    ctx.arc(x, y, 5, 0, Math.PI * 2);
+    ctx.fillStyle = cat.color;
+    ctx.fill();
+    ctx.strokeStyle = 'white';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    const lx = cx + (R + 28) * Math.cos(angle);
+    const ly = cy + (R + 28) * Math.sin(angle);
+    ctx.font = '600 11px Inter, sans-serif';
+    ctx.fillStyle = cat.color;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(cat.name, lx, ly - 8);
+    ctx.font = '800 13px Inter, sans-serif';
+    ctx.fillStyle = '#1e293b';
+    ctx.fillText(cat.val + '%', lx, ly + 8);
+  });
+
+  // Pct labels
+  ctx.font = '500 9px Inter, sans-serif';
+  ctx.fillStyle = '#94a3b8';
+  ctx.textAlign = 'left';
+  [20, 40, 60, 80, 100].forEach(pct => {
+    const y = cy - R * (pct / 100);
+    ctx.fillText(pct + '%', cx + 4, y - 2);
+  });
+}
+
+// Initial draw
+drawRadar('A');
+window.addEventListener('resize', () => {
+  const active = document.querySelector('.nav-tab.active');
+  if (active) drawRadar(active.dataset.tab);
+});
+</script>
+
+</body>
+</html>
