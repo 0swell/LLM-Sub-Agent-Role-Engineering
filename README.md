@@ -1,5 +1,7 @@
 # LLM Sub-Agent'larinda Rol Muhendisligi ve Degerlendirme Tutarliligi
 
+📅 **Başlangıç:** 15.03.2026 • **Bitiş:** 19.06.2026
+
 > Feature Selection Calismasi
 
 Bu projede, **100 farkli rol-bazli LLM sub-agent** olusturularak ayni frontend projesinin **30 ozellik** uzerinden degerlendirilmesi saglanmistir. Profesyonel insan uzmanlarin verdigi puanlar **Ground Truth** olarak kullanilmis, sapma analizi ve Feature Selection ile agentlerin guclu/zayif yanlari belirlenmistir.
